@@ -207,6 +207,4 @@ La aplicación cubrirá los siguientes módulos principales:
 | **RBAC** | Control de acceso basado en roles (Role-Based Access Control) |
 | **PWA** | Aplicación web progresiva con capacidades móviles |
 
----
 
-*Documento elaborado para la fase de análisis y diseño del sistema. Sujeto a revisión y aprobación por los interesados del proyecto.*
