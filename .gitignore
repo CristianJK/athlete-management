@@ -1,0 +1,40 @@
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Laravel
+/backend/vendor/
+/backend/node_modules/
+/backend/public/storage
+/backend/public/hot
+/backend/storage/*.key
+/backend/.phpunit.result.cache
+/backend/.env
+/backend/.env.backup
+/backend/.env.production
+/backend/auth.json
+/backend/npm-debug.log
+/backend/yarn-error.log
+/backend/.pnpm-debug.log
+/backend/.fleet/
+/backend/.config/
+
+# React / Frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/*.local
+/frontend/.vscode/
+
+# Docker
+.docker-data/
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db

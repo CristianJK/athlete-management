@@ -1,0 +1,63 @@
+services:
+  # PHP Application
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        user: laravel
+        uid: 1000
+    image: athlete-management-backend
+    container_name: athlete-management-app
+    restart: unless-stopped
+    working_dir: /var/www/backend
+    volumes:
+      - ./backend:/var/www/backend
+    networks:
+      - athlete-management-network
+
+  # Nginx Web Server
+  webserver:
+    image: nginx:alpine
+    container_name: athlete-management-webserver
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - athlete-management-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: athlete-management-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: athlete-management-db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    volumes:
+      - athlete-management-db-data:/var/lib/postgresql/data
+    networks:
+      - athlete-management-network
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:alpine
+    container_name: athlete-management-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - athlete-management-network
+
+networks:
+  athlete-management-network:
+    driver: bridge
+
+volumes:
+  athlete-management-db-data:

@@ -1,4 +1,4 @@
-# ClubApp — Documento Maestro de Desarrollo
+# athlete-management — Documento Maestro de Desarrollo
 
 > **Para agentes de IA:** Este archivo es la fuente de verdad del proyecto. Antes de generar cualquier código, lee este documento completo. Respeta el stack, la estructura de carpetas, las convenciones de nomenclatura y el orden del checklist. Marca cada tarea como completada (`[x]`) al terminarla.
 
@@ -6,7 +6,7 @@
 
 ## Visión General
 
-**ClubApp** es una aplicación web y móvil para la gestión integral de clubes deportivos. Permite controlar la asistencia de deportistas mediante códigos QR, administrar el pago de mensualidades y programar eventos, todo bajo cumplimiento de la normativa de protección de datos personales (Habeas Data — Ley 1581 de 2012, Colombia).
+**athlete-management** es una aplicación web y móvil para la gestión integral de clubes deportivos. Permite controlar la asistencia de deportistas mediante códigos QR, administrar el pago de mensualidades y programar eventos, todo bajo cumplimiento de la normativa de protección de datos personales (Habeas Data — Ley 1581 de 2012, Colombia).
 
 ### Roles de usuario
 | Rol | Descripción |
@@ -147,12 +147,12 @@ clubapp/
 ### FASE 0 — Configuración del Entorno
 
 #### Infraestructura base
-- [ ] Crear repositorio en GitHub con estructura monorepo (`backend/` y `frontend/`)
-- [ ] Crear `.gitignore` para Laravel y React
-- [ ] Configurar `docker-compose.yml` con servicios: `app` (PHP-FPM), `nginx`, `postgres`, `redis`
-- [ ] Crear `Dockerfile` para el backend Laravel
-- [ ] Verificar que `docker compose up` levanta todos los servicios correctamente
-- [ ] Configurar variables de entorno — copiar `.env.example` a `.env` en backend y frontend
+- [x] Crear repositorio en GitHub con estructura monorepo (`backend/` y `frontend/`)
+- [x] Crear `.gitignore` para Laravel y React
+- [x] Configurar `docker-compose.yml` con servicios: `app` (PHP-FPM), `nginx`, `postgres`, `redis`
+- [x] Crear `Dockerfile` para el backend Laravel
+- [] Verificar que `docker compose up` levanta todos los servicios correctamente
+- [] Configurar variables de entorno — copiar `.env.example` a `.env` en backend y frontend
 - [ ] Confirmar conexión exitosa a PostgreSQL desde Laravel (`php artisan db:show`)
 
 #### Backend — Instalación
