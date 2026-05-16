@@ -208,8 +208,8 @@ clubapp/
 
 #### Backend
 - [x] Crear `AuthController` con métodos: `login`, `logout`, `me`, `refreshToken`
-- [ ] Configurar rutas de autenticación en `routes/api.php`
-- [ ] Implementar middleware `CheckRole` para proteger rutas por rol
+- [x] Configurar rutas de autenticación en `routes/api.php`
+- [x] Implementar middleware `CheckRole` para proteger rutas por rol
 - [ ] Crear Policies: `AthletePolicy`, `PaymentPolicy`, `EventPolicy`, `AttendancePolicy`
 - [ ] Implementar respuesta 401 y 403 con mensajes en español
 - [ ] Endpoint `POST /api/v1/auth/login` — devuelve token + datos del usuario + rol
