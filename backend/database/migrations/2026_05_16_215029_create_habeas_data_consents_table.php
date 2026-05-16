@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('habeas_data_consents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('athlete_id')->constrained()->onDelete('cascade');
+            $table->timestamp('accepted_at');
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->timestamp('revoked_at')->nullable();
             $table->timestamps();
         });
     }

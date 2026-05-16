@@ -177,29 +177,29 @@ clubapp/
 ### FASE 1 — Base de Datos y Modelos
 
 #### Migraciones
-- [ ] `users` — id, name, email, password, role (enum: admin/coach/athlete), avatar, active, timestamps
-- [ ] `clubs` — id, name, logo, address, phone, email, timestamps
-- [ ] `athletes` — id, user_id (FK), club_id (FK), document_type, document_number, birthdate, gender, address, phone, emergency_contact_name, emergency_contact_phone, emergency_contact_relationship, sport, group_name, status (enum: active/inactive/suspended), joined_at, timestamps
-- [ ] `habeas_data_consents` — id, athlete_id (FK), accepted_at, ip_address, user_agent, revoked_at, timestamps
-- [ ] `attendance_sessions` — id, club_id (FK), coach_id (FK), name, qr_token, expires_at, group_name, timestamps
-- [ ] `attendance_records` — id, session_id (FK), athlete_id (FK), checked_in_at, method (enum: qr/manual), timestamps
-- [ ] `payment_configs` — id, club_id (FK), group_name, sport, monthly_fee, timestamps
-- [ ] `payments` — id, athlete_id (FK), amount, period_month, period_year, due_date, paid_at, payment_method, status (enum: paid/pending/overdue), receipt_url, notes, registered_by (FK users), timestamps
-- [ ] `events` — id, club_id (FK), created_by (FK users), title, description, type (enum: training/tournament/meeting/other), location, starts_at, ends_at, max_attendees, status (enum: upcoming/ongoing/finished/cancelled), timestamps
-- [ ] `event_attendees` — id, event_id (FK), athlete_id (FK), rsvp_status (enum: confirmed/cancelled/pending), timestamps
-- [ ] `notifications` — id, user_id (FK), type, title, body, read_at, data (jsonb), timestamps
+- [x] `users` — id, name, email, password, role (enum: admin/coach/athlete), avatar, active, timestamps
+- [x] `clubs` — id, name, logo, address, phone, email, timestamps
+- [x] `athletes` — id, user_id (FK), club_id (FK), document_type, document_number, birthdate, gender, address, phone, emergency_contact_name, emergency_contact_phone, emergency_contact_relationship, sport, group_name, status (enum: active/inactive/suspended), joined_at, timestamps
+- [x] `habeas_data_consents` — id, athlete_id (FK), accepted_at, ip_address, user_agent, revoked_at, timestamps
+- [x] `attendance_sessions` — id, club_id (FK), coach_id (FK), name, qr_token, expires_at, group_name, timestamps
+- [x] `attendance_records` — id, session_id (FK), athlete_id (FK), checked_in_at, method (enum: qr/manual), timestamps
+- [x] `payment_configs` — id, club_id (FK), group_name, sport, monthly_fee, timestamps
+- [x] `payments` — id, athlete_id (FK), amount, period_month, period_year, due_date, paid_at, payment_method, status (enum: paid/pending/overdue), receipt_url, notes, registered_by (FK users), timestamps
+- [x] `events` — id, club_id (FK), created_by (FK users), title, description, type (enum: training/tournament/meeting/other), location, starts_at, ends_at, max_attendees, status (enum: upcoming/ongoing/finished/cancelled), timestamps
+- [x] `event_attendees` — id, event_id (FK), athlete_id (FK), rsvp_status (enum: confirmed/cancelled/pending), timestamps
+- [x] `notifications` — id, user_id (FK), type, title, body, read_at, data (jsonb), timestamps
 
 #### Modelos Eloquent
-- [ ] Crear modelo `User` con relaciones y cast de role
-- [ ] Crear modelo `Athlete` con relaciones a `User`, `Club`, `Payments`, `AttendanceRecords`, `HabeasDataConsent`
-- [ ] Crear modelo `Club` con relaciones a `Athletes`, `Events`, `AttendanceSessions`
-- [ ] Crear modelo `HabeasDataConsent`
-- [ ] Crear modelo `AttendanceSession` con relación a `AttendanceRecords`
-- [ ] Crear modelo `AttendanceRecord`
-- [ ] Crear modelo `Payment` con relación a `Athlete`
-- [ ] Crear modelo `Event` con relación a `EventAttendees`
-- [ ] Crear modelo `EventAttendee`
-- [ ] Crear modelo `Notification`
+- [x] Crear modelo `User` con relaciones y cast de role
+- [x] Crear modelo `Athlete` con relaciones a `User`, `Club`, `Payments`, `AttendanceRecords`, `HabeasDataConsent`
+- [x] Crear modelo `Club` con relaciones a `Athletes`, `Events`, `AttendanceSessions`
+- [x] Crear modelo `HabeasDataConsent`
+- [x] Crear modelo `AttendanceSession` con relación a `AttendanceRecords`
+- [x] Crear modelo `AttendanceRecord`
+- [x] Crear modelo `Payment` con relación a `Athlete`
+- [x] Crear modelo `Event` con relación a `EventAttendees`
+- [x] Crear modelo `EventAttendee`
+- [x] Crear modelo `Notification`
 - [ ] Crear factories y seeders para datos de prueba (al menos 1 club, 1 admin, 2 coaches, 20 athletes)
 
 ---
@@ -207,7 +207,7 @@ clubapp/
 ### FASE 2 — Autenticación y Autorización
 
 #### Backend
-- [ ] Crear `AuthController` con métodos: `login`, `logout`, `me`, `refreshToken`
+- [x] Crear `AuthController` con métodos: `login`, `logout`, `me`, `refreshToken`
 - [ ] Configurar rutas de autenticación en `routes/api.php`
 - [ ] Implementar middleware `CheckRole` para proteger rutas por rol
 - [ ] Crear Policies: `AthletePolicy`, `PaymentPolicy`, `EventPolicy`, `AttendancePolicy`

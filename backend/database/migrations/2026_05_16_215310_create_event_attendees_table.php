@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('event_attendees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('athlete_id')->constrained()->onDelete('cascade');
+            $table->enum('rsvp_status', ['confirmed', 'cancelled', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

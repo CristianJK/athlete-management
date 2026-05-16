@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('athlete_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
+            $table->integer('period_month');
+            $table->integer('period_year');
+            $table->date('due_date');
+            $table->timestamp('paid_at')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->enum('status', ['paid', 'pending', 'overdue'])->default('pending');
+            $table->string('receipt_url')->nullable();
+            $table->text('notes')->nullable();
+            $table->foreignId('registered_by')->constrained('users');
             $table->timestamps();
         });
     }
