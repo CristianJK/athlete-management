@@ -129,7 +129,7 @@ clubapp/
 ---
 
 ## Convenciones
-
+ db:s
 - **Backend:** Controladores en PascalCase, métodos en camelCase, rutas en kebab-case, modelos en singular (`Athlete`, no `Athletes`).
 - **Frontend:** Componentes en PascalCase, hooks con prefijo `use`, stores con sufijo `Store`, archivos de tipos con sufijo `.types.ts`.
 - **API:** Todas las rutas bajo prefijo `/api/v1/`. Respuestas siempre con estructura `{ data, message, errors }`.
@@ -153,24 +153,24 @@ clubapp/
 - [x] Crear `Dockerfile` para el backend Laravel
 - [x] Verificar que `docker compose up` levanta todos los servicios correctamente
 - [x] Configurar variables de entorno — copiar `.env.example` a `.env` en backend y frontend
-- [ ] Confirmar conexión exitosa a PostgreSQL desde Laravel (`php artisan db:show`)
+- [x] Confirmar conexión exitosa a PostgreSQL desde Laravel (`php artisan db:show`)
 
 #### Backend — Instalación
-- [ ] Instalar Laravel 13 en `/backend`
-- [ ] Instalar dependencias: `laravel/sanctum`, `bacon/bacon-qr-code`, `scramble` (docs API)
-- [ ] Configurar `config/database.php` para PostgreSQL
-- [ ] Publicar y configurar Laravel Sanctum
-- [ ] Configurar Laravel Queue con driver Redis
-- [ ] Configurar Laravel Storage (disco local para desarrollo, S3 para producción)
+- [x] Instalar Laravel 13 en `/backend`
+- [x] Instalar dependencias: `laravel/sanctum`, `bacon/bacon-qr-code`, `scramble` (docs API)
+- [x] Configurar `config/database.php` para PostgreSQL
+- [x] Publicar y configurar Laravel Sanctum
+- [x] Configurar Laravel Queue con driver Redis
+- [x] Configurar Laravel Storage (disco local para desarrollo, S3 para producción)
 
 #### Frontend — Instalación
-- [ ] Crear proyecto React con Vite + TypeScript en `/frontend`
-- [ ] Instalar y configurar Tailwind CSS
-- [ ] Instalar shadcn/ui y generar componentes base
-- [ ] Instalar dependencias: `axios`, `react-router-dom`, `zustand`, `react-hook-form`, `zod`, `qrcode.react`, `react-qr-reader`, `react-big-calendar`, `recharts`, `react-hot-toast`
-- [ ] Configurar Axios con `baseURL` apuntando a la API y interceptores para token
-- [ ] Configurar `vite-plugin-pwa` con manifest básico
-- [ ] Configurar React Router con rutas protegidas por rol
+- [x] Crear proyecto React con Vite + TypeScript en `/frontend`
+- [x] Instalar y configurar Tailwind CSS (v4)
+- [x] Instalar shadcn/ui y generar componentes base
+- [x] Instalar dependencias: `axios`, `react-router-dom`, `zustand`, `react-hook-form`, `zod`, `qrcode.react`, `react-qr-reader`, `react-big-calendar`, `recharts`, `react-hot-toast`
+- [x] Configurar Axios con `baseURL` apuntando a la API y interceptores para token
+- [x] Configurar `vite-plugin-pwa` con manifest básico
+- [x] Configurar React Router con rutas protegidas por rol
 
 ---
 
