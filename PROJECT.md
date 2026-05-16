@@ -151,8 +151,8 @@ clubapp/
 - [x] Crear `.gitignore` para Laravel y React
 - [x] Configurar `docker-compose.yml` con servicios: `app` (PHP-FPM), `nginx`, `postgres`, `redis`
 - [x] Crear `Dockerfile` para el backend Laravel
-- [] Verificar que `docker compose up` levanta todos los servicios correctamente
-- [] Configurar variables de entorno — copiar `.env.example` a `.env` en backend y frontend
+- [x] Verificar que `docker compose up` levanta todos los servicios correctamente
+- [x] Configurar variables de entorno — copiar `.env.example` a `.env` en backend y frontend
 - [ ] Confirmar conexión exitosa a PostgreSQL desde Laravel (`php artisan db:show`)
 
 #### Backend — Instalación
