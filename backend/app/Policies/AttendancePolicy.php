@@ -13,7 +13,7 @@ class AttendancePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']);
     }
 
     /**
@@ -21,7 +21,7 @@ class AttendancePolicy
      */
     public function view(User $user, AttendanceRecord $attendanceRecord): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']) || ($user->athlete && $user->athlete->id === $attendanceRecord->athlete_id);
     }
 
     /**
@@ -29,7 +29,7 @@ class AttendancePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']);
     }
 
     /**
@@ -37,7 +37,7 @@ class AttendancePolicy
      */
     public function update(User $user, AttendanceRecord $attendanceRecord): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']);
     }
 
     /**
@@ -45,7 +45,7 @@ class AttendancePolicy
      */
     public function delete(User $user, AttendanceRecord $attendanceRecord): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class AttendancePolicy
      */
     public function restore(User $user, AttendanceRecord $attendanceRecord): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class AttendancePolicy
      */
     public function forceDelete(User $user, AttendanceRecord $attendanceRecord): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 }

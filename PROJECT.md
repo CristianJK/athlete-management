@@ -210,19 +210,19 @@ clubapp/
 - [x] Crear `AuthController` con métodos: `login`, `logout`, `me`, `refreshToken`
 - [x] Configurar rutas de autenticación en `routes/api.php`
 - [x] Implementar middleware `CheckRole` para proteger rutas por rol
-- [ ] Crear Policies: `AthletePolicy`, `PaymentPolicy`, `EventPolicy`, `AttendancePolicy`
-- [ ] Implementar respuesta 401 y 403 con mensajes en español
-- [ ] Endpoint `POST /api/v1/auth/login` — devuelve token + datos del usuario + rol
-- [ ] Endpoint `POST /api/v1/auth/logout` — revoca token Sanctum
-- [ ] Endpoint `GET /api/v1/auth/me` — devuelve perfil del usuario autenticado
+- [x] Crear Policies: `AthletePolicy`, `PaymentPolicy`, `EventPolicy`, `AttendancePolicy`
+- [x] Implementar respuesta 401 y 403 con mensajes en español
+- [x] Endpoint `POST /api/v1/auth/login` — devuelve token + datos del usuario + rol
+- [x] Endpoint `POST /api/v1/auth/logout` — revoca token Sanctum
+- [x] Endpoint `GET /api/v1/auth/me` — devuelve perfil del usuario autenticado
 
 #### Frontend
-- [ ] Crear `authStore` con Zustand — estado: `user`, `token`, `isAuthenticated`
-- [ ] Crear página `LoginPage` con formulario (React Hook Form + Zod)
-- [ ] Implementar persistencia de token en `localStorage`
-- [ ] Crear componente `ProtectedRoute` que redirige según rol
+- [x] Crear `authStore` con Zustand — estado: `user`, `token`, `isAuthenticated`
+- [x] Crear página `LoginPage` con formulario (React Hook Form + Zod)
+- [x] Implementar persistencia de token en `localStorage`
+- [x] Crear componente `ProtectedRoute` que redirige según rol
 - [ ] Crear layouts: `AdminLayout`, `CoachLayout`, `AthleteLayout` con sidebar/navbar
-- [ ] Implementar cierre de sesión automático al expirar token (interceptor Axios 401)
+- [x] Implementar cierre de sesión automático al expirar token (interceptor Axios 401)
 
 ---
 

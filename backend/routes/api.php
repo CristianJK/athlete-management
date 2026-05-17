@@ -8,8 +8,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/refresh', [AuthController::class, 'refreshToken'])->name('refresh');
-Route::post('/me', [AuthController::class, 'me'])->name('me');
+Route::prefix('v1/auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/refresh', [AuthController::class, 'refreshToken'])->name('refresh');
+        Route::get('/me', [AuthController::class, 'me'])->name('me');
+    });
+});

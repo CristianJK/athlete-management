@@ -13,7 +13,7 @@ class AthletePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']);
     }
 
     /**
@@ -21,7 +21,7 @@ class AthletePolicy
      */
     public function view(User $user, Athlete $athlete): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']) || $user->id === $athlete->user_id;
     }
 
     /**
@@ -29,7 +29,7 @@ class AthletePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']);
     }
 
     /**
@@ -37,7 +37,7 @@ class AthletePolicy
      */
     public function update(User $user, Athlete $athlete): bool
     {
-        return false;
+        return in_array($user->role, ['admin', 'coach']) || $user->id === $athlete->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class AthletePolicy
      */
     public function delete(User $user, Athlete $athlete): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class AthletePolicy
      */
     public function restore(User $user, Athlete $athlete): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -61,6 +61,6 @@ class AthletePolicy
      */
     public function forceDelete(User $user, Athlete $athlete): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 }
