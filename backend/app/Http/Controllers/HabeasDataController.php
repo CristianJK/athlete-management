@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Athlete;
+use App\Models\HabeasDataConsent;
 use Illuminate\Http\Request;
 
 class HabeasDataController extends Controller
@@ -17,34 +19,62 @@ class HabeasDataController extends Controller
     }
     public function acceptConsent(Request $request)
     {
-        // Assuming the user is authenticated via Sanctum
-        $user = $request->user();
-        $user->habeas_data_accepted = true;
-        $user->save();
+        $request->validate([
+            'athlete_id' => 'required|exists:athletes,id'
+        ]);
+
+        $athlete = Athlete::findOrFail($request->athlete_id);
+
+        // Verificamos autorización (debería existir una política, pero lo hacemos rápido)
+        if ($request->user()->role === 'athlete' && $request->user()->id !== $athlete->user_id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $consent = HabeasDataConsent::updateOrCreate(
+            ['athlete_id' => $athlete->id],
+            [
+                'accepted_at' => now(),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'revoked_at' => null
+            ]
+        );
 
         return response()->json([
             'message' => 'Consentimiento aceptado',
-            'user' => $user,
+            'consent' => $consent,
         ]);
     }
 
-    public function revokeConsent(Request $request)
+    public function revokeConsent(Request $request, Athlete $athlete)
     {
-        // Assuming the user is authenticated via Sanctum
-        $user = $request->user();
-        $user->habeas_data_accepted = false;
-        $user->save();
+        if ($request->user()->role === 'athlete' && $request->user()->id !== $athlete->user_id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $consent = HabeasDataConsent::where('athlete_id', $athlete->id)->first();
+        if ($consent) {
+            $consent->revoked_at = now();
+            $consent->save();
+        }
 
         return response()->json([
             'message' => 'Consentimiento revocado',
-            'user' => $user,
+            'consent' => $consent,
         ]);
     }
 
-    public function getConsentStatus(Request $request)
+    public function getConsentStatus(Request $request, Athlete $athlete)
     {
+        if ($request->user()->role === 'athlete' && $request->user()->id !== $athlete->user_id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $consent = HabeasDataConsent::where('athlete_id', $athlete->id)->first();
+
         return response()->json([
-            'habeas_data_accepted' => $request->user()->habeas_data_accepted,
+            'has_consent' => $consent && $consent->accepted_at && !$consent->revoked_at,
+            'details' => $consent
         ]);
     }
 }

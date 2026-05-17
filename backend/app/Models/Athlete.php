@@ -32,6 +32,9 @@ class Athlete extends Model
     protected $casts = [
         'birthdate' => 'date',
         'joined_at' => 'date',
+        'emergency_contact_name' => 'encrypted',
+        'emergency_contact_phone' => 'encrypted',
+        'emergency_contact_relationship' => 'encrypted',
     ];
 
     public function user(): BelongsTo

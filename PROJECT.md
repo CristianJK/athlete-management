@@ -229,12 +229,12 @@ clubapp/
 ### FASE 3 — Módulo Habeas Data
 
 #### Backend
-- [ ] Crear `HabeasDataController` con métodos: `showPolicy`, `acceptConsent`, `revokeConsent`, `getConsentStatus`
-- [ ] Endpoint `GET /api/v1/habeas-data/policy` — devuelve texto de política de privacidad
-- [ ] Endpoint `POST /api/v1/habeas-data/consent` — registra aceptación con IP y user-agent
-- [ ] Endpoint `DELETE /api/v1/habeas-data/consent/{athlete}` — revoca consentimiento
-- [ ] Asegurar que campos sensibles (`emergency_contact_*`) están cifrados con `encrypted:` cast de Laravel
-- [ ] Incluir validación: no se puede completar registro de deportista sin aceptar política
+- [x] Crear `HabeasDataController` con métodos: `showPolicy`, `acceptConsent`, `revokeConsent`, `getConsentStatus`
+- [x] Endpoint `GET /api/v1/habeas-data/policy` — devuelve texto de política de privacidad
+- [x] Endpoint `POST /api/v1/habeas-data/consent` — registra aceptación con IP y user-agent
+- [x] Endpoint `DELETE /api/v1/habeas-data/consent/{athlete}` — revoca consentimiento
+- [x] Asegurar que campos sensibles (`emergency_contact_*`) están cifrados con `encrypted:` cast de Laravel
+- [x] Incluir validación: no se puede completar registro de deportista sin aceptar política
 
 #### Frontend
 - [ ] Crear componente `HabeasDataModal` — muestra política y botón de aceptación
@@ -247,14 +247,14 @@ clubapp/
 ### FASE 4 — Módulo Deportistas
 
 #### Backend
-- [ ] Crear `AthleteController` con: `index`, `store`, `show`, `update`, `destroy` (soft delete), `changeStatus`
+- [x] Crear `AthleteController` con: `index`, `store`, `show`, `update`, `destroy` (soft delete), `changeStatus`
 - [ ] Crear `AthleteRequest` con validaciones completas
-- [ ] Endpoint `GET /api/v1/athletes` — listado con filtros (status, sport, group, search) y paginación
-- [ ] Endpoint `POST /api/v1/athletes` — crear deportista + registrar consentimiento
-- [ ] Endpoint `GET /api/v1/athletes/{id}` — perfil completo
-- [ ] Endpoint `PUT /api/v1/athletes/{id}` — actualizar datos
-- [ ] Endpoint `PATCH /api/v1/athletes/{id}/status` — cambiar estado
-- [ ] Endpoint `DELETE /api/v1/athletes/{id}` — eliminación lógica
+- [x] Endpoint `GET /api/v1/athletes` — listado con filtros (status, sport, group, search) y paginación
+- [x] Endpoint `POST /api/v1/athletes` — crear deportista + registrar consentimiento
+- [x] Endpoint `GET /api/v1/athletes/{id}` — perfil completo
+- [x] Endpoint `PUT /api/v1/athletes/{id}` — actualizar datos
+- [x] Endpoint `PATCH /api/v1/athletes/{id}/status` — cambiar estado
+- [x] Endpoint `DELETE /api/v1/athletes/{id}` — eliminación lógica
 
 #### Frontend
 - [ ] Crear página `AthletesPage` con tabla (TanStack Table), buscador y filtros
@@ -269,15 +269,15 @@ clubapp/
 ### FASE 5 — Módulo Asistencia y QR
 
 #### Backend
-- [ ] Crear `AttendanceSessionController`: `create`, `show`, `close`
-- [ ] Crear `AttendanceRecordController`: `checkIn` (por QR), `manualCheckIn`, `index`
-- [ ] Endpoint `POST /api/v1/attendance/sessions` — genera sesión y token QR único (UUID + firma HMAC)
-- [ ] Endpoint `GET /api/v1/attendance/sessions/{id}` — detalle de sesión con lista de presentes
-- [ ] Endpoint `POST /api/v1/attendance/check-in` — valida QR (token, expiración, duplicado) y registra asistencia
-- [ ] Endpoint `POST /api/v1/attendance/manual-check-in` — registro manual por coach/admin
-- [ ] Endpoint `GET /api/v1/attendance/records` — historial con filtros (athlete, session, date range)
-- [ ] Endpoint `GET /api/v1/attendance/reports` — reporte exportable (PDF/Excel)
-- [ ] Validar que un deportista no pueda registrarse dos veces en la misma sesión
+- [x] Crear `AttendanceSessionController`: `create`, `show`, `close`
+- [x] Crear `AttendanceRecordController`: `checkIn` (por QR), `manualCheckIn`, `index`
+- [x] Endpoint `POST /api/v1/attendance/sessions` — genera sesión y token QR único (UUID + firma HMAC)
+- [x] Endpoint `GET /api/v1/attendance/sessions/{id}` — detalle de sesión con lista de presentes
+- [x] Endpoint `POST /api/v1/attendance/check-in` — valida QR (token, expiración, duplicado) y registra asistencia
+- [x] Endpoint `POST /api/v1/attendance/manual-check-in` — registro manual por coach/admin
+- [x] Endpoint `GET /api/v1/attendance/records` — historial con filtros (athlete, session, date range)
+- [x] Endpoint `GET /api/v1/attendance/reports` — reporte exportable (PDF/Excel)
+- [x] Validar que un deportista no pueda registrarse dos veces en la misma sesión
 
 #### Frontend
 - [ ] Crear página `QRGeneratorPage` (admin/coach) — formulario de sesión + QR generado con `qrcode.react`
@@ -292,12 +292,12 @@ clubapp/
 ### FASE 6 — Módulo Pagos
 
 #### Backend
-- [ ] Crear `PaymentConfigController`: `index`, `store`, `update` (configuración de tarifas por grupo)
-- [ ] Crear `PaymentController`: `index`, `store`, `show`, `generateReceipt`
-- [ ] Endpoint `GET /api/v1/payments` — listado con filtros (status, athlete, period, month)
-- [ ] Endpoint `POST /api/v1/payments` — registrar pago
-- [ ] Endpoint `GET /api/v1/payments/{id}/receipt` — generar PDF de recibo
-- [ ] Endpoint `GET /api/v1/payments/summary` — resumen del mes (total cobrado, pendientes, en mora)
+- [x] Crear `PaymentConfigController`: `index`, `store`, `update` (configuración de tarifas por grupo)
+- [x] Crear `PaymentController`: `index`, `store`, `show`, `generateReceipt`
+- [x] Endpoint `GET /api/v1/payments` — listado con filtros (status, athlete, period, month)
+- [x] Endpoint `POST /api/v1/payments` — registrar pago
+- [x] Endpoint `GET /api/v1/payments/{id}/receipt` — generar PDF de recibo
+- [x] Endpoint `GET /api/v1/payments/summary` — resumen del mes (total cobrado, pendientes, en mora)
 - [ ] Comando Laravel `php artisan payments:mark-overdue` — marca como vencidos los pagos no realizados (correr con scheduler)
 - [ ] Configurar Laravel Scheduler para ejecutar `payments:mark-overdue` diariamente
 - [ ] Enviar notificación por email 3 días antes del vencimiento (queue job)
@@ -315,14 +315,14 @@ clubapp/
 ### FASE 7 — Módulo Eventos
 
 #### Backend
-- [ ] Crear `EventController`: `index`, `store`, `show`, `update`, `destroy`, `updateStatus`
-- [ ] Crear `EventAttendeeController`: `rsvp`, `index` (lista de asistentes)
-- [ ] Endpoint `GET /api/v1/events` — listado con filtros (type, status, date range)
-- [ ] Endpoint `POST /api/v1/events` — crear evento
-- [ ] Endpoint `PUT /api/v1/events/{id}` — editar evento
-- [ ] Endpoint `DELETE /api/v1/events/{id}` — cancelar/eliminar evento
-- [ ] Endpoint `POST /api/v1/events/{id}/rsvp` — confirmar o cancelar asistencia
-- [ ] Endpoint `GET /api/v1/events/{id}/attendees` — lista de asistentes confirmados
+- [x] Crear `EventController`: `index`, `store`, `show`, `update`, `destroy`, `updateStatus`
+- [x] Crear `EventAttendeeController`: `rsvp`, `index` (lista de asistentes)
+- [x] Endpoint `GET /api/v1/events` — listado con filtros (type, status, date range)
+- [x] Endpoint `POST /api/v1/events` — crear evento
+- [x] Endpoint `PUT /api/v1/events/{id}` — editar evento
+- [x] Endpoint `DELETE /api/v1/events/{id}` — cancelar/eliminar evento
+- [x] Endpoint `POST /api/v1/events/{id}/rsvp` — confirmar o cancelar asistencia
+- [x] Endpoint `GET /api/v1/events/{id}/attendees` — lista de asistentes confirmados
 
 #### Frontend
 - [ ] Crear página `EventsPage` con vista calendario (`react-big-calendar`) y vista lista
@@ -337,9 +337,9 @@ clubapp/
 ### FASE 8 — Notificaciones
 
 #### Backend
-- [ ] Crear `NotificationController`: `index`, `markAsRead`, `markAllAsRead`
-- [ ] Endpoint `GET /api/v1/notifications` — listar notificaciones del usuario
-- [ ] Endpoint `PATCH /api/v1/notifications/{id}/read` — marcar como leída
+- [x] Crear `NotificationController`: `index`, `markAsRead`, `markAllAsRead`
+- [x] Endpoint `GET /api/v1/notifications` — listar notificaciones del usuario
+- [x] Endpoint `PATCH /api/v1/notifications/{id}/read` — marcar como leída
 - [ ] Crear notificaciones Laravel para: pago próximo a vencer, nuevo evento asignado, asistencia registrada, cambio de estado del perfil
 - [ ] Configurar envío de emails con las mismas notificaciones usando queue
 
@@ -370,11 +370,11 @@ clubapp/
 ### FASE 10 — Configuración y Ajustes
 
 #### Backend
-- [ ] Crear `ClubController`: `show`, `update` (datos del club)
-- [ ] Crear `UserController`: `index`, `store`, `update`, `destroy` (gestión de usuarios por admin)
-- [ ] Endpoint `GET /api/v1/club` — datos del club
-- [ ] Endpoint `PUT /api/v1/club` — actualizar info del club
-- [ ] Endpoint CRUD `/api/v1/users` — gestión de entrenadores y admins
+- [x] Crear `ClubController`: `show`,`store`, `update` (datos del club)
+- [x] Crear `UserController`: `index`, `store`, `update`, `destroy` (gestión de usuarios por admin)
+- [x] Endpoint `GET /api/v1/club` — datos del club
+- [x] Endpoint `PUT /api/v1/club` — actualizar info del club
+- [x] Endpoint CRUD `/api/v1/users` — gestión de entrenadores y admins
 
 #### Frontend
 - [ ] Crear página `SettingsPage` con secciones: Info del Club, Deportes y Grupos, Tarifas, Usuarios, Privacidad
