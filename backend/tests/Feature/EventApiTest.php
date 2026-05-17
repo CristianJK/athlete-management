@@ -14,7 +14,7 @@ class EventApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create(['role' => 'admin', 'club_id' => 1]);
+        $this->user = User::factory()->create(['role' => 'admin']);
         $this->club = Club::factory()->create(['id' => 1]);
     }
 
@@ -24,16 +24,14 @@ class EventApiTest extends TestCase
 
         $eventData = [
             'club_id' => $this->club->id,
-            'user_id' => $this->user->id,
-            'name' => 'Torneo Regional',
+            'title' => 'Torneo Regional',
             'description' => 'Torneo anual regional',
-            'date' => '2026-10-01',
-            'start_time' => '08:00',
-            'end_time' => '18:00',
+            'starts_at' => '2026-10-01 08:00:00',
+            'ends_at' => '2026-10-01 18:00:00',
             'location' => 'Estadio Principal',
-            'status' => 'scheduled',
+            'status' => 'upcoming',
             'type' => 'tournament',
-            'capacity' => 100,
+            'max_attendees' => 100,
         ];
 
         $response = $this->withHeaders([
@@ -41,6 +39,6 @@ class EventApiTest extends TestCase
         ])->postJson('/api/v1/events', $eventData);
 
         $response->assertStatus(201)
-                 ->assertJsonFragment(['name' => 'Torneo Regional']);
+                 ->assertJsonFragment(['title' => 'Torneo Regional']);
     }
 }

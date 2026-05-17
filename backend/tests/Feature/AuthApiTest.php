@@ -65,6 +65,6 @@ class AuthApiTest extends TestCase
         ])->postJson('/api/v1/auth/logout');
 
         $response->assertStatus(200)
-                 ->assertJson(['message' => 'Cierre de sesión exitoso']);
+                 ->assertJson(['message' => 'Logout exitoso']);
     }
 }

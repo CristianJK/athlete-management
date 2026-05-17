@@ -16,21 +16,21 @@ class EventController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'club_id' => 'required|exists:clubs,id',
-            'user_id' => 'required|exists:users,id',
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-            'location' => 'required|string',
-            'status' => 'required|string',
-            'type' => 'required|string',
-            'capacity' => 'required|integer',
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'starts_at' => 'required|date',
+            'ends_at' => 'required|date|after:starts_at',
+            'location' => 'nullable|string',
+            'status' => 'in:upcoming,ongoing,finished,cancelled',
+            'type' => 'required|in:training,tournament,meeting,other',
+            'max_attendees' => 'nullable|integer',
         ]);
 
-        $event = Event::create($request->all());
+        $event = Event::create(array_merge($data, [
+            'created_by' => $request->user()->id,
+        ]));
 
         return response()->json($event, 201);
     }
@@ -40,20 +40,18 @@ class EventController extends Controller
     }
     public function update(Request $request, Event $event)
     {
-        $request->validate([
-            'club_id' => 'required|exists:clubs,id',
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-            'location' => 'required|string',
-            'status' => 'required|string',
-            'type' => 'required|string',
-            'capacity' => 'required|integer',
+        $data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'starts_at' => 'required|date',
+            'ends_at' => 'required|date|after:starts_at',
+            'location' => 'nullable|string',
+            'status' => 'in:upcoming,ongoing,finished,cancelled',
+            'type' => 'required|in:training,tournament,meeting,other',
+            'max_attendees' => 'nullable|integer',
         ]);
 
-        $event->update($request->all());
+        $event->update($data);
 
         return response()->json($event);
     }

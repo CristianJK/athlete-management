@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 
 class AttendanceSessionController extends Controller
 {
-    // `create`, `show`, `close`
-
     public function create(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'club_id' => 'required|exists:clubs,id',
-            'event_id' => 'required|exists:events,id',
-            'date' => 'required|date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-            'status' => 'required|string',
+            'name' => 'required|string',
+            'qr_token' => 'required|string|unique:attendance_sessions,qr_token',
+            'expires_at' => 'required|date',
+            'group_name' => 'nullable|string',
         ]);
 
-        $attendanceSession = AttendanceSession::create($request->all());
+        $attendanceSession = AttendanceSession::create(array_merge($data, [
+            'coach_id' => $request->user()->id,
+        ]));
 
         return response()->json($attendanceSession, 201);
     }

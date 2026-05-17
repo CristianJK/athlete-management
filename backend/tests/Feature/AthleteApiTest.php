@@ -16,7 +16,7 @@ class AthleteApiTest extends TestCase
     {
         parent::setUp();
         // Evita el error de no haber definido factories para todas las relaciones en este test simple
-        $this->user = User::factory()->create(['role' => 'admin', 'club_id' => 1]);
+        $this->user = User::factory()->create(['role' => 'admin']);
         $this->club = Club::factory()->create(['id' => 1]);
     }
 
@@ -42,7 +42,7 @@ class AthleteApiTest extends TestCase
             'document_type' => 'CC',
             'document_number' => '123456789',
             'birthdate' => '2000-01-01',
-            'gender' => 'M',
+            'gender' => 'male',
             'address' => 'Calle Falsa 123',
             'phone' => '1234567890',
             'emergency_contact_name' => 'John Doe',

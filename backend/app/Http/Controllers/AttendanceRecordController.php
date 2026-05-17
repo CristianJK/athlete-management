@@ -25,7 +25,12 @@ class AttendanceRecordController extends Controller
             'athlete_id.unique' => 'El deportista ya se encuentra registrado en esta sesión.',
         ]);
 
-        $attendanceRecord = AttendanceRecord::create($request->all());
+        $attendanceRecord = AttendanceRecord::create([
+            'session_id' => $request->session_id,
+            'athlete_id' => $request->athlete_id,
+            'checked_in_at' => now(),
+            'method' => 'qr',
+        ]);
 
         return response()->json($attendanceRecord, 201);
     }
@@ -44,7 +49,12 @@ class AttendanceRecordController extends Controller
             'athlete_id.unique' => 'El deportista ya se encuentra registrado en esta sesión.',
         ]);
 
-        $attendanceRecord = AttendanceRecord::create($request->all());
+        $attendanceRecord = AttendanceRecord::create([
+            'session_id' => $request->session_id,
+            'athlete_id' => $request->athlete_id,
+            'checked_in_at' => now(),
+            'method' => 'manual',
+        ]);
 
         return response()->json($attendanceRecord, 201);
     }
