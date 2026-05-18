@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Athlete extends Model
 {
     use HasFactory;
+    
+    protected $with = ['user', 'habeasDataConsent'];
+    protected $appends = ['name', 'email', 'emergency_contact', 'habeas_data_accepted'];
+
     protected $casts = [
         'birthdate' => 'date',
         'joined_at' => 'date',
@@ -36,6 +40,30 @@ class Athlete extends Model
         'emergency_contact_phone' => 'encrypted',
         'emergency_contact_relationship' => 'encrypted',
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->user ? $this->user->name : '';
+    }
+
+    public function getEmailAttribute()
+    {
+        return $this->user ? $this->user->email : '';
+    }
+
+    public function getEmergencyContactAttribute()
+    {
+        return [
+            'name' => $this->emergency_contact_name,
+            'phone' => $this->emergency_contact_phone,
+            'relationship' => $this->emergency_contact_relationship,
+        ];
+    }
+
+    public function getHabeasDataAcceptedAttribute()
+    {
+        return $this->habeasDataConsent ? (bool)$this->habeasDataConsent->consent_given : true;
+    }
 
     public function user(): BelongsTo
     {

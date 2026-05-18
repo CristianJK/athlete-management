@@ -39,6 +39,35 @@ Una Single Page Application (SPA) en React que:
 ## Cómo usar el Mockup de Stitch
 
 > 💡 El mockup de Stitch es tu referencia visual. Antes de construir cada pantalla, mira la captura correspondiente y úsala como guía. No tienes que replicarla pixel a pixel — lo importante es la estructura y los elementos que contiene.
+> 
+> 🔗 **Enlace oficial del proyecto en Stitch:** [Stitch Mockup - ClubApp](https://stitch.withgoogle.com/projects/14480592572840340665)
+
+### 🎨 Guía del Sistema de Diseño (Extraído de Stitch)
+
+> [!IMPORTANT]
+> Si cambias de agente de IA o necesitas reanudar el desarrollo en otra sesión, esta sección contiene la **identidad visual exacta** del proyecto para mantener la coherencia sin necesidad de volver a abrir el navegador.
+
+#### 1. Paleta de Colores
+*   **Azul Primario (Deep Navy):** `#1A3C6E` (Fondo del sidebar, headers, botones principales).
+    *   *Tailwind equivalente:* Puedes usar colores de acento personalizados o mapearlos a clases con colores HSL/Hex en el archivo CSS global (`bg-[#1A3C6E]`, `text-[#1A3C6E]`).
+*   **Verde Acento (Neon Green):** `#39D353` (Badges de "Activo"/"Pagado", scanner de QR, acentos de éxito).
+    *   *Tailwind equivalente:* `bg-[#39D353]`.
+*   **Naranja/Marrón de Advertencia (Amber):** `#5E3100` / `#F59E0B` (Estados pendientes, advertencias de mora).
+    *   *Tailwind equivalente:* `text-[#5E3100]` o tonos amber/naranja premium.
+*   **Rojo Alerta (Rose/Red):** `#F43F5E` / `#E11D48` (Estados inactivos, rechazados, cancelaciones, cierre de sesión).
+*   **Gris Neutro (Slate/Gray):** Textos secundarios `#76777B` (Slate-500) y bordes `#E2E8F0` (Slate-200).
+*   **Fondo de la App:** Fondo claro premium `#F4F6F9` (Slate-50) y fondo oscuro `#0F172A` (Slate-900).
+
+#### 2. Tipografía y Micro-Interacciones
+*   **Fuente:** **Inter** (debe importarse en `index.css`).
+*   **Tamaños:** Títulos (`text-2xl` o `text-3xl` con `font-extrabold`), textos base (`text-sm` o `text-base`), etiquetas y badges (`text-xs` con `font-semibold`).
+*   **Efecto Hover:** Micro-animaciones en botones y tarjetas (`transition-all duration-200 hover:scale-[1.01] hover:shadow-md`).
+
+#### 3. Estructuras Visuales Clave
+*   **Contenedores y Tarjetas:** Esquinas muy redondeadas (`rounded-xl` y `rounded-2xl`), fondo blanco sólido o pizarra oscuro, bordes delgados (`border border-slate-100` o `border-slate-800`), sombras flotantes (`shadow-sm` o `shadow-md`).
+*   **Badges tipo "Píldora":** Relleno de color con opacidad del 10% y texto con opacidad del 100% (ej. `bg-emerald-500/10 text-emerald-500 font-semibold px-2.5 py-0.5 rounded-full text-xs`). Esto da un look sumamente moderno y limpio.
+*   **Sidebar (Admin/Coach):** Fondo azul sólido `#1A3C6E` con íconos vectoriales simples en blanco, textos en gris claro, y el botón del menú activo resaltado con un fondo sutil semi-transparente o un borde izquierdo de color verde acento `#39D353`.
+*   **Bottom Nav (Athlete - Móvil):** Barra inferior flotante blanca o pizarra, acentos de selección en azul primario, optimizado para pulgares.
 
 ### Cómo trabajar con las capturas en cada fase
 
@@ -61,7 +90,7 @@ La paleta de colores es: azul primario #1A3C6E, verde acento #39D353.
 
 Si tienes **link de Stitch**, compártelo con:
 ```
-Este es el link del mockup en Stitch: [url]
+Este es el link del mockup en Stitch: https://stitch.withgoogle.com/projects/14480592572840340665
 Construye el componente React de la pantalla [nombre].
 ```
 
