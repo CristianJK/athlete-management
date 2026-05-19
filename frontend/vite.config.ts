@@ -7,7 +7,6 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 export default defineConfig({
   server: {
     host: true,
-    https: true,
     proxy: {
       '/api': {
         target: 'http://localhost:8080', // tu Docker API
