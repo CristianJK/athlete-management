@@ -40,5 +40,5 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 USER $user
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+ENTRYPOINT ["/var/www/backend/docker/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
