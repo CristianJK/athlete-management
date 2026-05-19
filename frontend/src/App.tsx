@@ -12,31 +12,9 @@ import AttendancePage from './features/attendance/AttendancePage';
 import PaymentsPage from './features/payments/PaymentsPage';
 import EventsPage from './features/events/EventsPage';
 import NotificationsPage from './features/notifications/NotificationsPage';
-
-interface PageShellProps {
-  title: string;
-}
-
-// Shell genérico para páginas aún no implementadas
-function PageShell({ title }: PageShellProps) {
-  return (
-    <div className="bg-slate-900 border border-slate-850 rounded-2xl p-6 shadow-xl space-y-4 animate-fadeIn">
-      <h2 className="text-xl font-black text-slate-100">{title}</h2>
-      <p className="text-slate-400 text-sm">
-        Esta es la pantalla de prueba para <span className="font-bold text-blue-400">{title}</span>. 
-        En las siguientes fases, reemplazaremos este contenido por interfaces y dashboards altamente detallados.
-      </p>
-      <div className="bg-slate-950 p-4 rounded-xl text-xs space-y-1 text-slate-500 border border-slate-900">
-        <p>✓ Estado reactivo de Zustand: Cargado</p>
-        <p>✓ Rutas anidadas y herencia de Layout: Activo</p>
-      </div>
-    </div>
-  );
-}
-
-// Finanzas y Administración
-function Reports() { return <PageShell title="Reportes y Estadísticas Consolidadas" />; }
-function Settings() { return <PageShell title="Configuración del Club" />; }
+import ReportsPage from './features/reports/ReportsPage';
+import SettingsPage from './features/settings/SettingsPage';
+import { Toaster } from 'react-hot-toast';
 
 // --- WRAPPER DINÁMICO DE LAYOUT SEGÚN EL ROL DEL USUARIO ---
 function DynamicLayout() {
@@ -56,6 +34,13 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Toaster 
+        position="top-right" 
+        toastOptions={{ 
+          className: 'bg-slate-900 border border-slate-800 text-slate-100 text-xs font-bold rounded-xl px-4 py-3 shadow-2xl',
+          duration: 3500
+        }} 
+      />
       <Routes>
         {/* Ruta Pública (Acceso directo si no está autenticado, sino redirige a dashboard) */}
         <Route 
@@ -77,8 +62,8 @@ export default function App() {
 
           {/* Rutas exclusivas únicamente para Administradores */}
           <Route path="/payments" element={<ProtectedRoute allowedRoles={['admin']}><PaymentsPage /></ProtectedRoute>} />
-          <Route path="/reports" element={<ProtectedRoute allowedRoles={['admin']}><Reports /></ProtectedRoute>} />
-          <Route path="/settings" element={<ProtectedRoute allowedRoles={['admin']}><Settings /></ProtectedRoute>} />
+          <Route path="/reports" element={<ProtectedRoute allowedRoles={['admin']}><ReportsPage /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute allowedRoles={['admin']}><SettingsPage /></ProtectedRoute>} />
         </Route>
 
         {/* Fallback de navegación */}

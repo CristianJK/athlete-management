@@ -8,6 +8,7 @@ import type { Athlete, AthleteStatus } from '../../types/athlete.types';
 import StatusBadge from '../../components/shared/StatusBadge';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import ErrorMessage from '../../components/shared/ErrorMessage';
+import { toast } from 'react-hot-toast';
 
 // Esquema de validación para registrar un deportista
 const athleteSchema = zod.object({
@@ -141,6 +142,7 @@ export default function AthletesPage() {
       setAthletes((prev) => [newAthlete, ...prev]);
       setIsModalOpen(false);
       reset();
+      toast.success('¡Deportista creado y registrado exitosamente!');
     } catch (error: any) {
       console.error(error);
       // Simulación local si falla la llamada
@@ -154,6 +156,7 @@ export default function AthletesPage() {
       setAthletes((prev) => [simulatedNew, ...prev]);
       setIsModalOpen(false);
       reset();
+      toast.success('¡Deportista registrado exitosamente!');
     } finally {
       setIsSubmitting(false);
     }
@@ -169,11 +172,13 @@ export default function AthletesPage() {
       setAthletes((prev) =>
         prev.map((ath) => (ath.id === id ? { ...ath, status: nextStatus } : ath))
       );
+      toast.success('¡Estado del deportista actualizado exitosamente!');
     } catch (error) {
       // Simulación local ante falla de red
       setAthletes((prev) =>
         prev.map((ath) => (ath.id === id ? { ...ath, status: nextStatus } : ath))
       );
+      toast.success('¡Estado del deportista actualizado!');
     }
   };
 

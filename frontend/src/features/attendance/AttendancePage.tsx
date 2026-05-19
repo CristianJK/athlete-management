@@ -20,7 +20,7 @@ export default function AttendancePage() {
     message: string;
     athlete?: string;
   } | null>(null);
-  
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -67,9 +67,6 @@ export default function AttendancePage() {
         video: { facingMode: 'environment' },
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
       setIsCameraActive(true);
     } catch (err) {
       console.error('Error al encender la cámara:', err);
@@ -77,6 +74,12 @@ export default function AttendancePage() {
       setIsCameraActive(true);
     }
   };
+
+  useEffect(() => {
+    if (isCameraActive && videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+    }
+  }, [isCameraActive]);
 
   const stopCamera = () => {
     if (streamRef.current) {
@@ -131,7 +134,7 @@ export default function AttendancePage() {
         athlete_id: selectedAthlete.id,
         qr_token: generatedSession?.qr_token || 'mock-qr-token',
       });
-      
+
       setScanResult({
         status: 'success',
         title: '¡Asistencia Registrada!',
@@ -157,22 +160,20 @@ export default function AttendancePage() {
           <h1 className="text-2xl font-black text-slate-100 tracking-tight">Módulo de Asistencia QR</h1>
           <p className="text-slate-400 text-sm">Gestiona el ingreso digital en tiempo real mediante scanner de cámara o códigos de sesión.</p>
         </div>
-        
+
         {/* Switch Selector */}
         <div className="flex bg-slate-950 p-1.5 rounded-xl border border-slate-850 self-start md:self-auto">
           <button
             onClick={() => { setActiveTab('scanner'); stopCamera(); setScanResult(null); }}
-            className={`py-2 px-4 text-xs font-black rounded-lg transition cursor-pointer ${
-              activeTab === 'scanner' ? 'bg-[#1A3C6E] text-slate-100 shadow' : 'text-slate-500 hover:text-slate-300'
-            }`}
+            className={`py-2 px-4 text-xs font-black rounded-lg transition cursor-pointer ${activeTab === 'scanner' ? 'bg-[#1A3C6E] text-slate-100 shadow' : 'text-slate-500 hover:text-slate-300'
+              }`}
           >
             📷 Scanner de Cámara
           </button>
           <button
             onClick={() => { setActiveTab('generator'); stopCamera(); setScanResult(null); }}
-            className={`py-2 px-4 text-xs font-black rounded-lg transition cursor-pointer ${
-              activeTab === 'generator' ? 'bg-[#1A3C6E] text-slate-100 shadow' : 'text-slate-500 hover:text-slate-300'
-            }`}
+            className={`py-2 px-4 text-xs font-black rounded-lg transition cursor-pointer ${activeTab === 'generator' ? 'bg-[#1A3C6E] text-slate-100 shadow' : 'text-slate-500 hover:text-slate-300'
+              }`}
           >
             ⏱️ Generar QR de Clase
           </button>
@@ -182,11 +183,11 @@ export default function AttendancePage() {
       {/* --- PANEL DE ESCANEO DE QR (VISTA SCANNER) --- */}
       {activeTab === 'scanner' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Contenedor del Visor de la Cámara */}
           <div className="lg:col-span-2 bg-slate-900 border border-slate-850 rounded-2xl p-6 flex flex-col items-center justify-center space-y-6 relative overflow-hidden">
             <div className="absolute inset-0 bg-slate-950/20 pointer-events-none" />
-            
+
             <div className="text-center space-y-1 z-10">
               <h3 className="text-base font-extrabold text-slate-200">Lector Óptico QR</h3>
               <p className="text-slate-400 text-xs">Apunta tu código QR personal hacia la cámara del dispositivo.</p>
@@ -194,7 +195,7 @@ export default function AttendancePage() {
 
             {/* Cuadro de la cámara con marco neón y línea de barrido */}
             <div className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden bg-slate-950 border-2 border-slate-850 flex items-center justify-center">
-              
+
               {isCameraActive ? (
                 <>
                   {/* Visor de Video Real de la Cámara */}
@@ -202,6 +203,7 @@ export default function AttendancePage() {
                     ref={videoRef}
                     autoPlay
                     playsInline
+                    muted
                     className="w-full h-full object-cover transform -scale-x-100"
                   />
                   {/* Línea de Barrido Láser Neón */}
@@ -242,7 +244,7 @@ export default function AttendancePage() {
 
           {/* Consola de Simulación y Alertas */}
           <div className="space-y-6">
-            
+
             {/* Panel de Simulación Rápida */}
             <div className="bg-slate-900 border border-slate-850 rounded-2xl p-6 space-y-4">
               <h3 className="text-xs font-black text-slate-300 uppercase tracking-wider border-b border-slate-850 pb-3">
@@ -251,7 +253,7 @@ export default function AttendancePage() {
               <p className="text-slate-400 text-xs">
                 Simula el escaneo del código QR personal de un atleta para validar la respuesta del lector óptico.
               </p>
-              
+
               <div className="flex flex-col gap-2">
                 {mockAthletesList.map((ath) => (
                   <button
@@ -263,9 +265,8 @@ export default function AttendancePage() {
                       <p className="text-slate-200 group-hover:text-blue-400 transition">{ath.name}</p>
                       <p className="text-[10px] text-slate-500">{ath.group}</p>
                     </div>
-                    <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${
-                      ath.status === 'active' ? 'bg-emerald-500/10 text-emerald-400' : ath.status === 'suspended' ? 'bg-rose-500/10 text-rose-400' : 'bg-slate-800 text-slate-400'
-                    }`}>
+                    <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${ath.status === 'active' ? 'bg-emerald-500/10 text-emerald-400' : ath.status === 'suspended' ? 'bg-rose-500/10 text-rose-400' : 'bg-slate-800 text-slate-400'
+                      }`}>
                       {ath.status}
                     </span>
                   </button>
@@ -275,21 +276,19 @@ export default function AttendancePage() {
 
             {/* Tarjeta de Alerta Gigante Flotante */}
             {scanResult && (
-              <div className={`p-6 rounded-2xl border flex flex-col items-center text-center space-y-4 animate-scaleIn ${
-                scanResult.status === 'success' 
-                  ? 'bg-emerald-950/20 border-emerald-500/30' 
-                  : scanResult.status === 'warning'
-                    ? 'bg-amber-950/20 border-amber-500/30'
-                    : 'bg-rose-950/20 border-rose-500/30'
-              }`}>
-                {/* Iconos */}
-                <div className={`h-12 w-12 rounded-full flex items-center justify-center border shrink-0 ${
-                  scanResult.status === 'success'
-                    ? 'bg-emerald-500/10 border-emerald-500/35 text-[#39D353]'
-                    : scanResult.status === 'warning'
-                      ? 'bg-amber-500/10 border-amber-500/35 text-amber-500'
-                      : 'bg-rose-500/10 border-rose-500/35 text-rose-500'
+              <div className={`p-6 rounded-2xl border flex flex-col items-center text-center space-y-4 animate-scaleIn ${scanResult.status === 'success'
+                ? 'bg-emerald-950/20 border-emerald-500/30'
+                : scanResult.status === 'warning'
+                  ? 'bg-amber-950/20 border-amber-500/30'
+                  : 'bg-rose-950/20 border-rose-500/30'
                 }`}>
+                {/* Iconos */}
+                <div className={`h-12 w-12 rounded-full flex items-center justify-center border shrink-0 ${scanResult.status === 'success'
+                  ? 'bg-emerald-500/10 border-emerald-500/35 text-[#39D353]'
+                  : scanResult.status === 'warning'
+                    ? 'bg-amber-500/10 border-amber-500/35 text-amber-500'
+                    : 'bg-rose-500/10 border-rose-500/35 text-rose-500'
+                  }`}>
                   {scanResult.status === 'success' ? (
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -306,9 +305,8 @@ export default function AttendancePage() {
                 </div>
 
                 <div className="space-y-1">
-                  <h4 className={`text-base font-extrabold ${
-                    scanResult.status === 'success' ? 'text-emerald-400' : scanResult.status === 'warning' ? 'text-amber-400' : 'text-rose-400'
-                  }`}>
+                  <h4 className={`text-base font-extrabold ${scanResult.status === 'success' ? 'text-emerald-400' : scanResult.status === 'warning' ? 'text-amber-400' : 'text-rose-400'
+                    }`}>
                     {scanResult.title}
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed px-2">{scanResult.message}</p>
@@ -323,7 +321,7 @@ export default function AttendancePage() {
       {/* --- PANEL DEL GENERADOR DE SESIONES (VISTA GENERADOR) --- */}
       {activeTab === 'generator' && (
         <div className="bg-slate-900 border border-slate-850 rounded-2xl p-6 flex flex-col lg:flex-row gap-8 items-center">
-          
+
           {/* Controles del Generador */}
           <div className="w-full lg:w-1/2 space-y-6">
             <div className="space-y-2 border-b border-slate-850 pb-4">
