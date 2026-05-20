@@ -138,3 +138,13 @@ Route::prefix('v1/users')
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 
+Route::post('/v1/auth/setup', function (Request $request) {
+    $user = \App\Models\User::create([
+        'name' => 'Administrador',
+        'email' => 'admin@clubapp.com',
+        'password' => bcrypt('password123'),
+        'role' => 'admin',
+        'club_id' => null,
+    ]);
+    return response()->json(['message' => 'Usuario creado', 'user' => $user]);
+});
