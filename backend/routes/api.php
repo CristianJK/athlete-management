@@ -139,12 +139,24 @@ Route::prefix('v1/users')
     });
 
 Route::post('/v1/auth/setup', function (Request $request) {
+    // Primero crear el club
+    //#[Fillable(['name', 'logo', 'address', 'phone', 'email'])]
+    $club = \App\Models\Club::create([
+        'name' => 'Club Demo',
+        'logo' => 'https://via.placeholder.com/150',
+        'address' => 'Dirección de prueba',
+        'phone' => '123456789',
+        'email' => 'email de prueba',
+    ]);
+
+    // Luego crear el usuario con el club_id
     $user = \App\Models\User::create([
         'name' => 'Administrador',
-        'email' => 'admin@clubapp.com',
-        'password' => bcrypt('password123'),
+        'email' => 'cristiantorresjk@gmail.com',
+        'password' => bcrypt('jack1034'),
         'role' => 'admin',
-        'club_id' => null,
+        'club_id' => $club->id,
     ]);
-    return response()->json(['message' => 'Usuario creado', 'user' => $user]);
+
+    return response()->json(['message' => 'Usuario creado', 'user' => $user, 'club' => $club]);
 });
