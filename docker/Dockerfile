@@ -24,13 +24,15 @@ COPY backend/ .
 RUN composer install --no-dev --optimize-autoloader
 
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/sites-enabled/default
 
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN chown -R www-data:www-data /var/www/backend/storage /var/www/backend/bootstrap/cache
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 80
 

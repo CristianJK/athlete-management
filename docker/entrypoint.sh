@@ -9,5 +9,6 @@ php artisan migrate --force
 php artisan storage:link --force   # Necesario para imágenes y QR
 php artisan config:cache
 php artisan route:cache
-
+# Reemplazar el puerto dinámico de Render en nginx
+sed -i "s/\${PORT}/$PORT/g" /etc/nginx/conf.d/default.conf
 exec "$@"
